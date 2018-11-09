@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: files-consumer
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        prefer-ip-address: true
+  zipkin:
+      base-url: http://localhost:8006
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 1000MB
+
+server:
+  port: 8003
+
+#开启Feign对Hystrix的支持
+feign:
+  hystrix:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+
+
+
